@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import TopBar from "./components/TopBar"
 
 function App() {
   return (
     <div className="App">
-      <h1>Sprint Project 04</h1>
+      <TopBar/>
       <h2>Realizado el Git</h2>
       <h3>Creo el repositorio y sincronizo</h3>
     </div>
