@@ -1,15 +1,14 @@
 .bar {
-    background-color: black;
     color: white;
     margin: auto;
     width: 100%;
     /* height: 50px; */
-    background-color: rgb(70, 12, 2);
+    background-color: rgb(50, 1, 63);
 
 }
 
 .logo-bar{
-    width: 60%;
+    width: 40%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,14 +20,18 @@
 .logotipo{
     width: 100px;
     margin: 12px;
+    margin-right: -15px;
+    padding-right: 20px;
 }
 
 .profile-pic{
     width: 30px;
     margin: 12px;
+    margin-left: 0;
 }
 
 .isotipo {
-    width: 45px;
+    width: 50px;
     margin: 12px;
+    padding-left: 105px;
 }

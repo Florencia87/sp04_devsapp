@@ -1,0 +1,68 @@
+.posts-feed {
+    background-color: rgb(81, 4, 100);
+    margin: auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Fira Code', monospace;
+    height: 1500px;
+}
+
+.feed-component {
+    width: 40%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 40px;
+   
+}
+
+.profile-pic-feed {
+    width: 46%;
+    margin-top: -57px;
+    padding-bottom: 40px;
+    padding-left: 3px;
+}
+
+.postData {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+}
+
+.info { 
+    display:flex;
+    flex-direction: row;
+  
+}
+
+.post {
+   
+    text-align: left;
+    color: white;
+    padding-bottom: 15px;
+}
+
+.likes {
+    font-size: 15px;
+    color: red;
+}
+
+.end-line {
+    width: 40%;
+    background-color:  rgb(203, 69, 236);
+    height: 2px;
+    margin: auto;
+}
+
+.start-line {
+    width: 100%;
+    background-color:  rgb(203, 69, 236);
+    height: 2px;
+    margin: auto;
+}

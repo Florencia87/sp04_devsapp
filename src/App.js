@@ -1,13 +1,14 @@
 import './App.css';
 import TopBar from "./components/TopBar"
 import WhatsHappening from "./components/WhatsHappening"
+import Feed from "./components/Feed"
 
 function App() {
   return (
     <div className="App">
       <TopBar/>
       <WhatsHappening/>
-      <h3>Creo el repositorio y sincronizo</h3>
+      <Feed/>
     </div>
   );
 }
