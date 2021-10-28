@@ -9,13 +9,13 @@
 }
 
 .logo-bar{
-    width: 70%;
+    width: 60%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     align-content: space-around;
     margin: auto;
-    background-color: rgb(95, 50, 42);
+    
 }
 
 .logotipo{
