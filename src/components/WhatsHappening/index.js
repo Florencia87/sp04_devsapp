@@ -6,7 +6,7 @@ import { collections } from "../../firebase/firebaseConfig"
 
 
 
-export default function WhatsHappening({tweets, setTweets}) {
+export default function WhatsHappening() {
 
     const [tweet, setTweet] = useState({
         tweet:"",
@@ -15,29 +15,20 @@ export default function WhatsHappening({tweets, setTweets}) {
     const handleTweetChange = e => {
         setTweet({
             ...tweet,
-            tweet: e.target.value
+            tweet: e.target.value,
         })
-        console.log(tweet) 
+        // console.log(tweet) 
     }
 
     const sendTweet = (e) => {
         e.preventDefault()
-        let enviarTweet = firestore.collection(collections.TWEETS).add(tweet);
-        let solicitarDoc = enviarTweet.then(docRef => docRef.get())
+        firestore.collection(collections.TWEETS).add(tweet);
 
-        solicitarDoc.then(doc => {
-            const newTweet = {
-                tweet: doc.data().tweet,
-                id: doc.data().id
-            }
-
-            setTweets([ ...tweets, newTweet])
-            setTweet({
-                tweet: "",
-
-            })
-        })
-    }
+        setTweet({
+            tweet: "",
+            usuario: "",
+          })
+    };
 
     return (
         <div className="initial-post-area">

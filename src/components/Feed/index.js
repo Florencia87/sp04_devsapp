@@ -1,9 +1,15 @@
+import { firestore } from "../../firebase";
 import "./feed.css";
+import { collections } from "../../firebase/firebaseConfig"
 
 
 export default function Feed({tweet}) {
 
-
+    const handleLike = (id, likes) => {
+        console.log(likes);
+        if (!likes) likes = 0;
+        firestore.doc(`${collections.TWEETS}/${id}`).update({likes: likes + 1});
+    };
 
 
     return (
@@ -16,9 +22,12 @@ export default function Feed({tweet}) {
                         <p className="postDate">5 Jun</p>           
                     </div>
                     <div className="post">{tweet.tweet}</div>
-                    <div className="likes">
-                        100
-                    </div>
+                    <span className="likes" 
+                        onClick={() => handleLike(tweet.id, tweet.likes)} 
+                    >
+                      <img className="tinyLike" height="13px" src="./like.svg" alt="likesIcon" />  
+                      <span>{tweet.likes ? tweet.likes : 0}</span>
+                    </span>
                 </div>
             </div>
             <div className="end-line"></div>

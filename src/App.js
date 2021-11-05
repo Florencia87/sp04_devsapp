@@ -16,29 +16,26 @@ function App() {
 
 
   useEffect(() => {
-      firestore
-          .collection(collections.TWEETS)
-          .get()
-          .then((snapshot) => {
+      const cancelSus = firestore
+          .collection(collections.TWEETS) 
+          .onSnapshot((snapshot) => {
               const tweetArray = snapshot.docs.map(doc => {
                 return {
                   tweet : doc.data().tweet,
-                  id : doc.data().id,
+                  id : doc.id,
+                  likes : doc.data().likes
                 }
               })
-
-    
               setTweets(tweetArray)
-              })
-              
-          }, []);
+          });  
+      
+      return () => cancelSus();
+  }, []);
 
   return (
     <div className="App-container">
       <TopBar/>
       <WhatsHappening
-        tweets={tweets}
-        setTweets={setTweets}
       />
       <div className="start-line"></div>
       <div className="feed-container">

@@ -53,6 +53,10 @@
     color: red;
 }
 
+.tinyLike {
+    padding-right: 5px;
+}
+
 .end-line {
     width: 40%;
     background-color:  rgb(203, 69, 236);
