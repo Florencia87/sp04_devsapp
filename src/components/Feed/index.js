@@ -25,7 +25,7 @@ export default function Feed({tweet}) {
                     <span className="likes" 
                         onClick={() => handleLike(tweet.id, tweet.likes)} 
                     >
-                      <img className="tinyLike" height="13px" src="./like.svg" alt="likesIcon" />  
+                      <img className="tinyLike" height="13px" src="./images/like.svg" alt="likesIcon" />  
                       <span>{tweet.likes ? tweet.likes : 0}</span>
                     </span>
                 </div>
