@@ -2,17 +2,21 @@ import './App.css';
 import TopBar from "./components/TopBar"
 import WhatsHappening from "./components/WhatsHappening"
 import Feed from "./components/Feed"
+import LogInPage from "./components/LogInPage"
+import Profile from "./components/Profile"
 
-import { firestore } from "./firebase/index";
 import { collections } from "./firebase/firebaseConfig"
+import { firestore, loginConGoogle, auth, logout } from "./firebase/index";
 
 // import { DevsUnitedContext } from "../src/contexts/DevsUnitedContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 
 function App() {
 
   const [tweets, setTweets] = useState([]);
+  // const [showApp, setShowApp] = useState(false);
+  const [user, setUser ] = useState(null);
 
 
   useEffect(() => {
@@ -27,26 +31,38 @@ function App() {
                 }
               })
               setTweets(tweetArray)
-          });  
+          });
+        
+        auth.onAuthStateChanged((user) => {
+          setUser(user);
+          console.log(user);
+        })    
       
       return () => cancelSus();
   }, []);
 
   return (
     <div className="App-container">
-      <TopBar/>
-      <WhatsHappening
-      />
-      <div className="start-line"></div>
-      <div className="feed-container">
-          {tweets.map((tweet, index) => {
-            return <Feed
-                        key={index}
-                        tweet={tweet} 
-                        
-                    />
-          })}
-      </div>    
+      {user ? (
+        <>
+          <Profile user={user} />
+          <TopBar/>
+          <WhatsHappening
+          />
+          <div className="start-line"></div>
+          <div className="feed-container">
+              {tweets.map((tweet, index) => {
+                return <Feed
+                            key={index}
+                            tweet={tweet} 
+                            
+                        />
+           })}
+      </div>  
+        </>  
+      ) : ( <LogInPage user={user} setUser={setUser} /> )}
+
+        
     </div>
   );
 }

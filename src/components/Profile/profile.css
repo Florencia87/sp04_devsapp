@@ -1,0 +1,16 @@
+.useR {
+    background-color: rgb(81, 4, 100);
+    width: 100%;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: auto;
+    color: white;
+}
+
+.user-profile-pic {
+    width: 50px;
+}
