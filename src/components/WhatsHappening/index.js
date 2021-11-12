@@ -6,27 +6,32 @@ import { collections } from "../../firebase/firebaseConfig"
 
 
 
-export default function WhatsHappening() {
+
+export default function WhatsHappening({user}) {
 
     const [tweet, setTweet] = useState({
         tweet:"",
+        uid:"",
+        
     });
 
     const handleTweetChange = e => {
         setTweet({
             ...tweet,
             tweet: e.target.value,
+            uid: user.uid,
+            email: user.email,
+            date: new Date(e.target.value).valueOf()
         })
-        // console.log(tweet) 
+        console.log(tweet) 
     }
 
     const sendTweet = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         firestore.collection(collections.TWEETS).add(tweet);
 
         setTweet({
             tweet: "",
-            usuario: "",
           })
     };
 

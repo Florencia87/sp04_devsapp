@@ -3,7 +3,7 @@ import "./logIn.css";
 // import { firestore, loginConGoogle, auth, logout } from "../../firebase/index";
 // import { useState } from "react";
 
-export default function LogIn({user, setUser}) {
+export default function LogIn() {
   
 
 

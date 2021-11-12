@@ -27,7 +27,9 @@ function App() {
                 return {
                   tweet : doc.data().tweet,
                   id : doc.id,
-                  likes : doc.data().likes
+                  likes : doc.data().likes,
+                  uid : doc.data().uid,
+                  mail : doc.data().mail
                 }
               })
               setTweets(tweetArray)
@@ -48,6 +50,7 @@ function App() {
           <Profile user={user} />
           <TopBar/>
           <WhatsHappening
+            user={user}
           />
           <div className="start-line"></div>
           <div className="feed-container">
@@ -55,7 +58,10 @@ function App() {
                 return <Feed
                             key={index}
                             tweet={tweet} 
-                            
+                            user={user}
+                            tweets={tweets}
+                            setTweets={setTweets}
+
                         />
            })}
       </div>  

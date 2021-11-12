@@ -4,7 +4,7 @@
     width: 100%;
     box-sizing: border-box;
     font-family: 'Fira Code', monospace;
-    height: max-content;
+   
 }
 
 .feed-component {
@@ -15,6 +15,7 @@
     margin: auto;
     padding-top: 30px;
     padding-bottom: 40px;
+    height: max-content;
    
 }
 
@@ -41,6 +42,10 @@
   
 }
 
+.postDate {
+    padding-left: 40px;
+}
+
 .post {
    
     text-align: left;
@@ -55,6 +60,10 @@
 
 .tinyLike {
     padding-right: 5px;
+}
+
+.delete {
+    padding-left: 430px;
 }
 
 .end-line {
