@@ -21,7 +21,8 @@ function App() {
 
   useEffect(() => {
       const cancelSus = firestore
-          .collection(collections.TWEETS) 
+          .collection(collections.TWEETS)
+          .orderBy("date","desc")
           .onSnapshot((snapshot) => {
               const tweetArray = snapshot.docs.map(doc => {
                 return {
@@ -29,7 +30,13 @@ function App() {
                   id : doc.id,
                   likes : doc.data().likes,
                   uid : doc.data().uid,
-                  mail : doc.data().mail
+                  mail : doc.data().mail,
+                  userAvatar : doc.data().userAvatar,
+                  userName : doc.data().userName,
+                  userDate : doc.data().userDate,
+                  userMonth : doc.data().userMonth,
+                  date : doc.data().date ? doc.data().date : null,
+                  fecha : doc.data().fecha ? doc.data().fecha  : null
                 }
               })
               setTweets(tweetArray)
@@ -37,7 +44,7 @@ function App() {
         
         auth.onAuthStateChanged((user) => {
           setUser(user);
-          console.log(user);
+          console.log("este es el user",user);
         })    
       
       return () => cancelSus();
@@ -59,9 +66,6 @@ function App() {
                             key={index}
                             tweet={tweet} 
                             user={user}
-                            tweets={tweets}
-                            setTweets={setTweets}
-
                         />
            })}
       </div>  

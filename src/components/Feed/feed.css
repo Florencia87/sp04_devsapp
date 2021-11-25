@@ -27,7 +27,8 @@
 }
 
 .postData {
-    margin-left: 10px;
+    margin-left: 40px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -37,9 +38,10 @@
 }
 
 .info { 
+    width: 100%;
     display:flex;
     flex-direction: row;
-  
+    justify-content: space-between;
 }
 
 .postDate {
@@ -53,9 +55,18 @@
     padding-bottom: 15px;
 }
 
+.graphs{
+    display: flex;
+    width: 100%;
+}
+
 .likes {
     font-size: 15px;
     color: red;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    
 }
 
 .tinyLike {
@@ -63,7 +74,7 @@
 }
 
 .delete {
-    padding-left: 430px;
+    padding-left: 0x    px;
 }
 
 .end-line {
