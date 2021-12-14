@@ -46,6 +46,7 @@
 
 .postDate {
     padding-left: 40px;
+    width: max-content;
 }
 
 .post {

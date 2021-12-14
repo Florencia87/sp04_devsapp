@@ -4,11 +4,10 @@ import "./logIn.css";
 // import { useState } from "react";
 
 export default function LogIn() {
-  
+  console.log("Loginnnn")
+    
 
-
-
-    return (
+    return (    
         <div className="logIn-component">
             <section className="presentation">
                 <img style={{ width: "160px" }} src="./images/grupo2.svg" alt="ispotipo"></img>

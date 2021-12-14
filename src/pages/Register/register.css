@@ -1,0 +1,54 @@
+.register-component {
+    box-sizing: border-box;
+    background-color: rgb(81, 4, 100);
+    display: flex;
+    margin: auto;
+    width: 100%;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .presentation {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8%;
+  }
+  
+  .registerSection {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: white;
+  }
+  
+  .registerSection h1 {
+    text-align: left;
+    margin-left: 20%;
+    margin-bottom: 8px;
+    font-size: 30px;
+  
+  }
+  
+  .registerSection p {
+    text-align: left;
+    margin-left: 20%;
+  }
+  
+  .selectButton {
+    width: 100%;
+  }
+
+  .selectButton button {
+    width: 17%;
+  }
+  
+  footer {
+    margin-left: 20%;
+    margin-top: 80px;
+  }
+  

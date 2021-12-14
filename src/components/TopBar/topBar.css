@@ -24,10 +24,11 @@
     padding-right: 20px;
 }
 
-.profile-pic{
+.user-profile-pic{
     width: 30px;
     margin: 12px;
     margin-left: 0;
+    cursor: pointer;
 }
 
 .isotipo {

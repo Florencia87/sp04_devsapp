@@ -1,7 +1,8 @@
-import "./style.css";
+import Profile from "../../pages/Profile";
+import "./topBar.css";
+import { Link } from "react-router-dom";
 
-
-export default function TopBar() {
+export default function TopBar({user}) {
 
 
 
@@ -9,7 +10,7 @@ export default function TopBar() {
     return (
         <div className="bar">
             <div className="logo-bar">
-                <img className="profile-pic" src="./images/profilePic.svg" alt="profileLogo" />
+                <Link to ="./profile"><img className="user-profile-pic" src={user.photoURL} alt="" /></Link>  
                 <img className="isotipo" src="./images/Isotipo.svg" alt="isotipo" /> 
                 <img className="logotipo" src="./images/Logotipo.svg" alt="Logotipo" />    
             </div>

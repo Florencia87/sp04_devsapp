@@ -7,13 +7,15 @@ import { useState } from "react";
 
 export default function Feed({tweet, user}) {
 
-    const [likes, setLikes] = useState(false)
+    const [isLiked, setIsLiked] = useState(false)
 
     const handleLike = (id, likes) => {
         console.log(likes);
-        setLikes(!likes);
+        setIsLiked(!isLiked);
         if (!likes) likes = 0;
-        firestore.doc(`${collections.TWEETS}/${id}`).update({likes: likes + 1});
+
+        const newLikes = isLiked ? likes - 1 : likes + 1;
+        firestore.doc(`${collections.TWEETS}/${id}`).update({likes: newLikes});
     };  
 
     const handleDeleteTweet = (id) => {
@@ -33,6 +35,7 @@ export default function Feed({tweet, user}) {
         "Septiembre",
         "Octubre",
         "Noviembre",
+        "Diciembre"
        
       ];
 
@@ -49,12 +52,12 @@ export default function Feed({tweet, user}) {
                     <div className="post">{tweet.tweet}</div>
                     <div className="graphs">
                         <span className="likes" onClick={() => handleLike(tweet.id, tweet.likes)}>
-                            {tweet.likes ? (
+                            {isLiked ? (
                             <img className="tinyLike" height="13px" src="./images/like.svg" alt="likesIcon" />  
                             ) : (
                             <img className="tinyLike" height="13px" src="./images/emptyheart.svg" alt="likesIcon" />      
                             )}
-                            {tweet.uid != user.uid && (
+                            {tweet.uid !== user.uid && (
                             <span className="countLikes">{tweet.likes ? tweet.likes : 0}</span> )} 
                         </span>
                         {tweet.uid === user.uid && (
