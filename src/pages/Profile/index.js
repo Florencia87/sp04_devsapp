@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { logout } from "../../firebase/index";
 import "./profile.css";
+import { useDB } from "../../contexts/DevsUnitedContext";
 
 
-export default function Profile({user}) {
+export default function Profile() {
    
-    
+    const { user } = useDB();
+    console.log("este es el user", user)
 
     return (
         <div className="user">

@@ -4,14 +4,14 @@ import Profile from "./pages/Profile";
 import LogIn from "./pages/LogInPage/index";
 import Register from "./pages/Register/index";
 import Main from "./pages/Main/index";
-import { DevsUnitedContext } from "./contexts/DevsUnitedContext";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import { useDB } from "./contexts/DevsUnitedContext";
 import { firestore, auth } from "./firebase/index";
 import { collections } from "./firebase/firebaseConfig";
 
 function App() {
   
-  const { setTweets, setUser, user } = useContext(DevsUnitedContext);
+  const { setTweets, setUser, user } = useDB();
 
 
 
@@ -38,8 +38,8 @@ function App() {
             setTweets(tweetArray)   
         });
       
-      auth.onAuthStateChanged((user) => {
-        setUser(user);
+      auth.onAuthStateChanged((usr) => {
+        setUser(usr);
           
       }) 
       

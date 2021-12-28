@@ -1,29 +1,25 @@
-import { createContext, useState} from "react";
-import { auth } from "../firebase/index";
+import React, { createContext, useContext, useState} from "react";
 
 
-export const DevsUnitedContext = createContext();
 
-export const DevsUnitedProvider = (props) => {
+const DevsUnitedContext = createContext([]);
 
-    const [ user, setUser ] = useState(null);
+export function DevsUnitedProvider({ children }) {
+    console.log("excecuting DevsUnitedProvider");
+
+    const [ user, setUser ] = useState([]);
 
     const [ tweets, setTweets ] = useState([]);
         
     const [ authenticated, setAuthenticated ] = useState(false);
 
-
-    // auth().onAuthStateChanged((user) => {
-    // setUser(user);
-    // const isAuthenticated = user ? true : false; 
-    // setAuthenticated(isAuthenticated);   
-    // });
- 
-
+    const value = { user, setUser, tweets, setTweets, authenticated, setAuthenticated };
 
     return (
-        <DevsUnitedContext.Provider value={{ user, setUser, tweets, setTweets, authenticated, setAuthenticated }}>
-            {props.children}
-        </DevsUnitedContext.Provider>    
+        <DevsUnitedContext.Provider value={value}>
+            {children}      
+        </DevsUnitedContext.Provider>  
     );
 };
+
+export const useDB = () => useContext(DevsUnitedContext);

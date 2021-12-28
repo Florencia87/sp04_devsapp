@@ -3,19 +3,13 @@ import TopBar from "../../components/TopBar"
 import WhatsHappening from "../../components/WhatsHappening"
 import Feed from "../../components/Feed"
 import LogIn from "../LogInPage/index"
-import { DevsUnitedContext } from "../../contexts/DevsUnitedContext";
-import { useContext } from "react";
+import { useDB } from "../../contexts/DevsUnitedContext";
 
 
 
 export default function Home() {
 
-  const { tweets } = useContext(DevsUnitedContext);
-  const { user } = useContext(DevsUnitedContext);
-  const { isAuthenticated } = useContext(DevsUnitedContext);
-
-
-  
+  const { tweets, user, isAuthenticated } = useDB();
   
 
   return (

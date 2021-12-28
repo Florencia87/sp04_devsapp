@@ -1,12 +1,11 @@
 import LogIn from "../LogInPage/index";
 import Home from "../Home/index";
-import { DevsUnitedContext } from "../../contexts/DevsUnitedContext";
-import { useContext } from "react";
+import { useDB } from "../../contexts/DevsUnitedContext";
 
 
 export default function Main() {
 
-  const { user } = useContext(DevsUnitedContext);
+  const { user } = useDB();
 
 
   return <> 
