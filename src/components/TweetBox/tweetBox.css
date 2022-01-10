@@ -6,6 +6,7 @@
     width: 100%;
     box-sizing: border-box;
     font-family: 'Fira Code', monospace;
+    margin-top: 76px;
 }
 
 .pic-and-type { 
@@ -22,6 +23,13 @@
     margin-top: -80px;
     padding-right: 10px;
     padding-bottom: 77px;
+}
+
+textarea {
+    border: 0;
+    outline: 0;
+    resize: none;
+    border-radius: 10px;
 }
 
 .wh-form {

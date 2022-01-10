@@ -1,4 +1,3 @@
-import Profile from "../../pages/Profile";
 import "./topBar.css";
 import { Link } from "react-router-dom";
 

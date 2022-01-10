@@ -57,7 +57,6 @@ function App() {
                render={() => {
                 return <Profile user={user} />;
               }}/>
-        {/* <Route path="/*" component={Home}/>  */}
         <Route path="/register" component={Register}/>
         <Route exact path="/" component={Main}/>
     </Switch>   

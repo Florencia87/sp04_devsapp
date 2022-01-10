@@ -1,5 +1,5 @@
 import { firestore } from "../../firebase/index";
-import "./whatsHappening.css";
+import "./tweetBox.css";
 import { useState } from "react";
 import { collections } from "../../firebase/firebaseConfig"
 
@@ -7,7 +7,7 @@ import { collections } from "../../firebase/firebaseConfig"
 
 
 
-export default function WhatsHappening({user}) {
+export default function TweetBox({user}) {
 
     const [contador, setContador] = useState(0)
     
@@ -64,7 +64,7 @@ export default function WhatsHappening({user}) {
                         <div className="counting-in">{contador}</div>
                         <div className="counting-max">200 max.</div>
                     </div>
-                    <button onClick={sendTweet} className="post-btn">POST</button>
+                    <button onClick={sendTweet}  className="post-btn">POST</button>
                 </form>
             </div>
         </div>
