@@ -4,16 +4,16 @@ import TweetBox from "../../components/TweetBox";
 import Feed from "../../components/Feed";
 import { useDB } from "../../contexts/DevsUnitedContext";
 import Loading from "../../components/Loading/Loading";
-
+import Register from "../Register/index"
 
 
 export default function Home() {
 
-  const { tweets, user, setRegistered, isLoading } = useDB();
+  const { tweets, user, registered, isLoading } = useDB();
   
 
   return (
-    // setRegistered ? (
+    registered ? (
     <div className="App-container">
       {isLoading && (
         <Loading />)
@@ -33,6 +33,6 @@ export default function Home() {
           })}
         </div> 
     </div> )
-    // : <Register />)  
+    : <Register />)  
     
   }

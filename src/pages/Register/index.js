@@ -11,46 +11,42 @@ export default function Register() {
     const { tweets, user, registered, setRegistered, regUserName, setRegUserName } = useDB();
 
  
-    const handleRegNameChange = (e) => {
-       const { value } = e.target 
-       setRegUserName(value)
-
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        alert("el formulario se a enviado")
         setRegistered(true)
         
     }
 
     return (
-        !registered ? (
+        // !registered ? (
         <div className="main-container">
             <div className="register-component">
                 <section className="presentation">
                     <img style={{ width: "160px" }} src="./images/grupo2.svg" alt="ispotipo"></img>
                     <img style={{ width: "300px" }} src="./images/Logotipo.svg" alt="logotipo"></img>
                 </section>
-                <form className="registerSection">
+                <form onSubmit={handleSubmit} className="registerSection">
                     <h1>
                         WELCOME <br></br> {regUserName}
                     </h1>
                     <input
                         type="text"
-                        name={regUserName}
+                        value={regUserName}
                         placeholder="Type your UserName"
                         className="searchInput"
-                        onChange={handleRegNameChange}
+                        onChange={(e) => setRegUserName(e.target.value)}
                     />
                     <p>Select your favorite color</p>  
                     <ColorPicker />
-                    <button type="submit" onClick={handleSubmit} className="continue" >CONTINUE</button>            
+                    <button type="submit" className="continue" >CONTINUE</button>            
                 </form> 
             </div>
             <footer>
                 <img style={{ width: "200px" }} src="./images/footer.svg" alt="Devs_United"></img>
             </footer>
         </div>)
-        :  <Register />
-    );
+    //     :  <Register />
+    // );
   }

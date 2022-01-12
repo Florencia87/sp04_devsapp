@@ -25,6 +25,8 @@ export function DevsUnitedProvider({ children }) {
 
     const [ selectColor, setSelectColor ] = useState(colors[0]);
 
+    const [ showPosts, setShowPosts ] = useState(true)
+
     // const USER_STATES = {
     //     NONE: 0,
     //     ERROR: -1,
@@ -32,7 +34,7 @@ export function DevsUnitedProvider({ children }) {
     //     REGISTERED: 2
     // }
 
-    const value = { user, setUser, tweets, setTweets, registered, setRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading };
+    const value = { user, setUser, tweets, setTweets, showPosts, setShowPosts, registered, setRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading };
 
 
  
