@@ -1,5 +1,5 @@
 import Home from "./pages/Home";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useParams } from "react-router-dom";
 import Profile from "./pages/Profile";
 import LogIn from "./pages/LogInPage/index";
 import Register from "./pages/Register/index";
@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { useDB } from "./contexts/DevsUnitedContext";
 import { firestore, auth } from "./firebase/index";
 import { collections } from "./firebase/firebaseConfig";
+
+
 
 function App() {
   
@@ -40,11 +42,12 @@ function App() {
       
       auth.onAuthStateChanged((usr) => {
         setUser(usr);
-          
-      }) 
-      
+         
+      })
+  
     
     return () => cancelSus();
+     
 }, []);
 
 

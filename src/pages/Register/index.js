@@ -1,26 +1,52 @@
 import { useState } from "react";
-import TweetBox from "../../components/TweetBox";
 import { useDB } from "../../contexts/DevsUnitedContext";
 import "./register.css";
 import ColorPicker from "../../components/ColorPicker";
+import { firestore } from "../../firebase";
+import { collections } from "../../firebase/firebaseConfig";
 
 
 
 export default function Register() {
 
-    const { tweets, user, registered, setRegistered, regUserName, setRegUserName } = useDB();
+    const { user, setRegistered, setIsRegistered, devUser, setDevUser } = useDB();
 
  
 
+    const handleUserNameChange = e => {
+        setDevUser({
+            ...devUser,
+            devName : e.target.value,
+            uid: user.uid,
+            email: user.email
+        })
+    };
+
+    // Estoy probando manejar el devName utilizando el metodo update
+    // const handleUserNameChange = (id, devName) => {
+    //     firestore.doc(`${collections.DEVUSER}/${id}`).update({devName: setDevUser})
+    // }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("el formulario se a enviado")
-        setRegistered(true)
+        firestore.collection(collections.DEVUSER).add(devUser)
+        // alert("el formulario se a enviado")
+        setIsRegistered(true)
         
-    }
+        
+    };
+
+    // Para mi deberia estar en el sumbit
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     firestore.doc(`${collections.DEVUSER}/${id}`).update({devName: setDevUser})
+    //     setRegistered(true);
+    // }
+
+    
 
     return (
-        // !registered ? (
+
         <div className="main-container">
             <div className="register-component">
                 <section className="presentation">
@@ -29,14 +55,14 @@ export default function Register() {
                 </section>
                 <form onSubmit={handleSubmit} className="registerSection">
                     <h1>
-                        WELCOME <br></br> {regUserName}
+                        WELCOME <br></br> {devUser.devName}
                     </h1>
                     <input
                         type="text"
-                        value={regUserName}
+                        value={devUser.devName}
                         placeholder="Type your UserName"
                         className="searchInput"
-                        onChange={(e) => setRegUserName(e.target.value)}
+                        onChange={handleUserNameChange}
                     />
                     <p>Select your favorite color</p>  
                     <ColorPicker />
@@ -47,6 +73,5 @@ export default function Register() {
                 <img style={{ width: "200px" }} src="./images/footer.svg" alt="Devs_United"></img>
             </footer>
         </div>)
-    //     :  <Register />
-    // );
+
   }

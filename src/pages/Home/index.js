@@ -4,35 +4,43 @@ import TweetBox from "../../components/TweetBox";
 import Feed from "../../components/Feed";
 import { useDB } from "../../contexts/DevsUnitedContext";
 import Loading from "../../components/Loading/Loading";
-import Register from "../Register/index"
+import Register from "../Register/index";
+import { query, db } from "firebase/firestore";
+
 
 
 export default function Home() {
 
-  const { tweets, user, registered, isLoading } = useDB();
+  const { tweets, user, isRegistered, isLoading } = useDB();
+  
+  // const yaRegistrado = query(collection (db, "devsUsers"), where("email", "==", true))
+    
   
 
   return (
-    registered ? (
-    <div className="App-container">
-      {isLoading && (
-        <Loading />)
-      }
-        <TopBar user={user} />
-        <TweetBox
-          user={user}
-        />
-        <div className="start-line"></div>
-        <div className="feed-container">
-            {tweets.map((tweet, index) => {
-              return <Feed
-                          key={index}
-                          tweet={tweet} 
-                          user={user}
-                      />
-          })}
-        </div> 
-    </div> )
-    : <Register />)  
-    
+    <>
+        {isRegistered ? 
+          <div className="App-container">
+            {isLoading && (
+              <Loading />)
+            }
+              <TopBar user={user} />
+              <TweetBox
+                user={user}
+              />
+              <div className="start-line"></div>
+              <div className="feed-container">
+                  {tweets.map((tweet, index) => {
+                    return <Feed
+                                key={index}
+                                tweet={tweet} 
+                                user={user}
+                            />
+                })}
+              </div> 
+          </div> 
+          : <Register />
+        }  
+    </>
+    )
   }

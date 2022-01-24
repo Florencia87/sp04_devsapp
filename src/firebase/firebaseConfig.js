@@ -9,5 +9,5 @@ export const firebaseConfig = {
 
 export const collections = {
   TWEETS: "tweets",
-  DEVUSER: "devuser"
+  DEVUSER: "devsUsers"
 }

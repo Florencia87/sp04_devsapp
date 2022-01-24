@@ -8,7 +8,7 @@ import { useDB } from "../../contexts/DevsUnitedContext";
 
 export default function Feed({tweet, user}) {
 
-    const { regUserName } = useDB();
+    const { devUser } = useDB();
 
     const [isLiked, setIsLiked] = useState(false)
 
@@ -49,7 +49,7 @@ export default function Feed({tweet, user}) {
                 <img className="profile-pic-feed" src={tweet.userAvatar} alt="profileLogo" />
                 <div className="postData">
                     <div className="info">
-                        <p className="username">{regUserName || tweet.userName}</p> 
+                        <p className="username">{devUser.devName || tweet.userName}</p> 
                         <p className="postDate">{tweet.userDate}<> de </>{months[tweet.userMonth]}</p>           
                     </div>
                     <div className="post">{tweet.tweet}</div>

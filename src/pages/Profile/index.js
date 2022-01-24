@@ -3,6 +3,7 @@ import { logout } from "../../firebase/index";
 import "./profile.css";
 import { useDB } from "../../contexts/DevsUnitedContext";
 import Feed from "../../components/Feed";
+import Users from "../../components/Users";
 
 
 export default function Profile() {
@@ -30,6 +31,7 @@ export default function Profile() {
                 <button onClick={handleShowPosts} className="posts">
                   { showPosts ? 'POSTS' : 'LIKES' }
                 </button>
+                <Users />
                 {/* <ol>
                     {tweets
                         .filter((tweet) => {
