@@ -5,13 +5,13 @@ import Feed from "../../components/Feed";
 import { useDB } from "../../contexts/DevsUnitedContext";
 import Loading from "../../components/Loading/Loading";
 import Register from "../Register/index";
-import { query, db } from "firebase/firestore";
+
 
 
 
 export default function Home() {
 
-  const { tweets, user, isRegistered, isLoading } = useDB();
+  const { tweets, user, isRegistered, isLoading, setIsRegistered, devUser } = useDB();
   
   // const yaRegistrado = query(collection (db, "devsUsers"), where("email", "==", true))
     
@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <>
-        {isRegistered ? 
+        {devUser ? 
           <div className="App-container">
             {isLoading && (
               <Loading />)

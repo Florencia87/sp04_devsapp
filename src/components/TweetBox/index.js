@@ -31,8 +31,8 @@ export default function TweetBox({user}) {
             tweet: e.target.value,
             uid: user.uid,
             email: user.email,
-            userAvatar: user.photoURL,
-            userName: user.displayName,
+            userAvatar: user.devAvatar,
+            userName: user.devName,
             userDate: naturalDate.getDate(),
             userMonth: naturalDate.getMonth()+1,
             date: Date.now(),
@@ -57,14 +57,14 @@ export default function TweetBox({user}) {
     return (
         <div className="initial-post-area">
             <div className="pic-and-type">
-                <img className="profile-pic-wh" src={user.photoURL} alt="profileLogo" />
+                <img className="profile-pic-wh" src={user.devAvatar} alt="profileLogo" />
                 <form className="wh-form">
                     <textarea placeholder="What's happening" cols="60" rows="9" value={tweet.tweet} onChange={handleTweetChange} ></textarea>
                     <div className="counting">
                         <div className="counting-in">{contador}</div>
                         <div className="counting-max">200 max.</div>
                     </div>
-                    <button onClick={sendTweet}  className="post-btn">POST</button>
+                    <button onClick={sendTweet} disabled={tweet.length === 0} className="post-btn">POST</button>
                 </form>
             </div>
         </div>

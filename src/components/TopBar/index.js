@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 export default function TopBar({user}) {
 
-
+    
 
 
     return (
         <div className="bar">
             <div className="logo-bar">
-                <Link to ="./profile"><img className="user-profile-pic" src={user.photoURL} alt="" /></Link>  
+                <Link to ="./profile"><img className="user-profile-pic" src={ user.devAvatar } alt="" /></Link>  
                 <img className="isotipo" src="./images/Isotipo.svg" alt="isotipo" /> 
                 <img className="logotipo" src="./images/Logotipo.svg" alt="Logotipo" />    
             </div>

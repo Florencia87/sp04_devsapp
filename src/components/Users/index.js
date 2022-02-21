@@ -35,14 +35,14 @@ function Users() {
                 // do something with documents
                 console.log({documents})
 
-                if ( devUser.email === user.email )
-                    return setRegistered(true)
+                // if ( devUser.email === user.email )
+                //     return setRegistered(true)
             })
        
     },[]);
 
     return (
-        <h1>Hello User</h1>
+        <h1>Hello {user.devName}</h1>
     )
     
 

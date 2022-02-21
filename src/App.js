@@ -34,15 +34,36 @@ function App() {
                 userDate : doc.data().userDate,
                 userMonth : doc.data().userMonth,
                 date : doc.data().date ? doc.data().date : null,
-                fecha : doc.data().fecha ? doc.data().fecha  : null
+                fecha : doc.data().fecha ? doc.data().fecha  : null,
+                name: doc.data().name ? doc.data().name : null
               }
             })
             setTweets(tweetArray)   
         });
       
-      auth.onAuthStateChanged((usr) => {
-        setUser(usr);
-         
+      auth.onAuthStateChanged((googleCreds) => {
+        console.log("USR: ", googleCreds)
+        if (googleCreds != null) {
+          firestore
+            .collection(collections.DEVUSER)
+            .where("uid", "==", googleCreds.uid)
+            .get()
+            .then( (querySnapshot) => {
+              console.log("Condicional: ", !querySnapshot.empty);
+              console.log("Objeto: ", querySnapshot);
+              if (!querySnapshot.empty) {
+                querySnapshot.forEach((doc) => {
+                    console.log("Obtuvo usuario: ", doc.data());
+                    setUser(doc.data());
+                });
+              } else {
+                console.log("Injecta googleCreds");
+                setUser(googleCreds);
+              }
+            })
+        } else {
+          setUser(null);
+        }
       })
   
     
@@ -51,19 +72,51 @@ function App() {
 }, []);
 
 
-  return (
-    <Switch>
-        <Route path="/logIn" component={LogIn}/> 
-        <Route exact path="/home" component={Home}/>
-        <Route exact
-               path="/profile" 
-               render={() => {
-                return <Profile user={user} />;
-              }}/>
-        <Route path="/register" component={Register}/>
-        <Route exact path="/" component={Main}/>
-    </Switch>   
-  )
+  const getContent = () => {
+    if ( user ) {
+      return <Main />
+    } else {
+      return <LogIn />
+    }
+
+  }
+
+  return <>
+      
+      <Switch>
+          <Route exact path="/home" component={Home}/>
+          <Route exact
+                path="/profile" 
+                render={() => {
+                  return <Profile user={user} />;
+                }}/>
+          <Route path="/register" component={Register}/>
+          {/* <Route exact path="/login" component={LogIn}/> */}
+          <Route exact path="/" component={Main}/>
+      
+          {getContent()}
+      </Switch>    
+    
+   </> 
 }      
 
 export default App;
+
+// {user ?
+      
+//   <Switch>
+      
+//       <Route exact path="/home" component={Home}/>
+//       <Route exact
+//             path="/profile" 
+//             render={() => {
+//               return <Profile user={user} />;
+//             }}/>
+//       <Route path="/register" component={Register}/>
+//       <Route exact path="/" component={Main}/>
+//   </Switch>
+//   : 
+//   <Switch>
+//     <LogIn/>  
+//   </Switch>   
+// }  

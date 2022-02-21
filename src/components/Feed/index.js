@@ -49,7 +49,7 @@ export default function Feed({tweet, user}) {
                 <img className="profile-pic-feed" src={tweet.userAvatar} alt="profileLogo" />
                 <div className="postData">
                     <div className="info">
-                        <p className="username">{devUser.devName || tweet.userName}</p> 
+                        <p className="username">{tweet.name || tweet.userName}</p> 
                         <p className="postDate">{tweet.userDate}<> de </>{months[tweet.userMonth]}</p>           
                     </div>
                     <div className="post">{tweet.tweet}</div>
