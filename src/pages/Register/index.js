@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { useDB } from "../../contexts/DevsUnitedContext";
 import "./register.css";
 import ColorPicker from "../../components/ColorPicker";
 import { firestore } from "../../firebase";
 import { collections } from "../../firebase/firebaseConfig";
-import Home from "../../pages/Home/index";
-
 
 
 export default function Register() {
@@ -24,33 +21,15 @@ export default function Register() {
         })
     };
 
-    // Estoy probando manejar el devName utilizando el metodo update
-    // const handleUserNameChange = (id, devName) => {
-    //     firestore.doc(`${collections.DEVUSER}/${id}`).update({devName: setDevUser})
-    // }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         firestore.collection(collections.DEVUSER).add(devUser)
         // alert("el formulario se a enviado")
         setIsRegistered(true)
         
-        // const newDevName = `${devUser.devName}`
-        // firestore.doc(`${collections.TWEETS}/${id}`).update({name: newDevName})
     };
 
-    // Para mi deberia estar en el sumbit
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     firestore.doc(`${collections.DEVUSER}/${id}`).update({devName: setDevUser})
-    //     setRegistered(true);
-    // }
-
-    
-
     return <> 
-        {user && !setIsRegistered ? (
-
             <div className="main-container">
                 <div className="register-component">
                     <section className="presentation">
@@ -76,8 +55,6 @@ export default function Register() {
                 <footer>
                     <img style={{ width: "200px" }} src="./images/footer.svg" alt="Devs_United"></img>
                 </footer>
-            </div>
-                ) : <Home />
-        }    
+            </div> 
         </>
   }

@@ -1,5 +1,5 @@
 import Home from "./pages/Home";
-import { Route, Switch, useParams } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Profile from "./pages/Profile";
 import LogIn from "./pages/LogInPage/index";
 import Register from "./pages/Register/index";
@@ -71,9 +71,8 @@ function App() {
      
 }, []);
 
-
   const getContent = () => {
-    if ( user ) {
+    if (user) {
       return <Main />
     } else {
       return <LogIn />
@@ -81,23 +80,24 @@ function App() {
 
   }
 
-  return <>
-      
-      <Switch>
-          <Route exact path="/home" component={Home}/>
-          <Route exact
-                path="/profile" 
-                render={() => {
-                  return <Profile user={user} />;
-                }}/>
-          <Route path="/register" component={Register}/>
-          {/* <Route exact path="/login" component={LogIn}/> */}
-          <Route exact path="/" component={Main}/>
-      
-          {getContent()}
-      </Switch>    
-    
-   </> 
+  return (
+    <>
+        { user ?  
+          <Switch>
+              <Route exact
+                    path="/profile" 
+                    render={() => {
+                      return <Profile user={user} />;
+                    }}/>
+              <Route path="/register" component={Register}/>
+              <Route exact path="/" component={Home}/>
+              {getContent()}
+          </Switch>  
+        : 
+          <LogIn />
+        }
+    </>
+  ) 
 }      
 
 export default App;

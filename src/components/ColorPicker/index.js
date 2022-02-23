@@ -11,7 +11,6 @@ function ColorPicker() {
           key={color.name}
           className="color"
           style={{ backgroundColor: color.hex }}
-        //   onClick={() => setSelectColor(color)}
           onClick={() => setSelectColor(color)}
         />
       );
