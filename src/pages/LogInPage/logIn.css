@@ -22,36 +22,47 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     color: white;
   }
   
   .logInSection h1 {
     text-align: left;
-    margin-left: 20%;
+    /* margin-left: 14%; */
     margin-bottom: 8px;
     font-size: 30px;
   }
   
   .logInSection p {
     text-align: left;
-    margin-left: 20%;
+    /* margin-left: 14%; */
   }
   .signInGoogle {
-    height: 35px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 20%;
-    margin-top: 10px;
+    margin: 10%;
     cursor: pointer;
+    padding: 0px;
+    border-style: none;
+    border-radius: 4px;
+    
   }
   
   .googleIcon {
     background-color: white;
-    width: 30px;
+    width: 49px;
+    height: 36px;
+    border-radius: 10px;
+    
   }
   
+  .googleIcon img {
+    padding-top: 4px;
+    margin: 0px;
+    
+  }
+
   footer {
     margin-left: 20%;
     margin-top: 80px;

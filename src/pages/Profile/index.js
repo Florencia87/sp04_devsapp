@@ -3,7 +3,7 @@ import { logout } from "../../firebase/index";
 import "./profile.css";
 import { useDB } from "../../contexts/DevsUnitedContext";
 import Feed from "../../components/Feed";
-import Users from "../../components/Users";
+//import Users from "../../components/Users";
 
 
 export default function Profile() {
@@ -20,18 +20,16 @@ export default function Profile() {
         <div className="user">
             <div className="user-profile">
                 <Link to ="./">
-                    <img className="user-profile-pic" src={user.devAvatar} alt="" />
+                    <img className="user-profile-pic" src={user.devAvatar} alt={ user.displayName}  />
                 </Link>
                 <p>Hola {user.devName}!</p>
-                <Link to ="/login">
-                    <button onClick={logout}>Log out</button>
-                </Link>
+                    <button onClick={logout}>Log out</button>    
             </div>
             <div className="content">
                 <button onClick={handleShowPosts} className="posts">
                   { showPosts ? 'POSTS' : 'LIKES' }
                 </button>
-                <Users />
+                {/* <Users /> */}
                 {/* <ol>
                     {tweets
                         .filter((tweet) => {

@@ -25,7 +25,7 @@ export function DevsUnitedProvider({ children }) {
         uid : "",
         likes : "",
         email : "",
-        color: "",
+        devColor: "",
         devAvatar : "",
         devName : "",  
 
@@ -33,22 +33,14 @@ export function DevsUnitedProvider({ children }) {
         
     const [ registered, setRegistered ] = useState(false);
 
-    const [ isRegistered, setIsRegistered ] = useState(false);
-
     const [ regUserName, setRegUserName ] = useState("");
 
     const [ selectColor, setSelectColor ] = useState(colors[0]);
 
     const [ showPosts, setShowPosts ] = useState(true)
 
-    // const USER_STATES = {
-    //     NONE: 0,
-    //     ERROR: -1,
-    //     LOGEDIN: 1,
-    //     REGISTERED: 2
-    // }
 
-    const value = { user, setUser, tweets, setTweets, showPosts, setShowPosts, devUser, setDevUser, registered, setRegistered, isRegistered, setIsRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading };
+    const value = { user, setUser, tweets, setTweets, showPosts, setShowPosts, devUser, setDevUser, registered, setRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading };
 
 
  

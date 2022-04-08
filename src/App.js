@@ -1,8 +1,8 @@
-import Home from "./pages/Home";
-import { Route, Switch } from "react-router-dom";
-import Profile from "./pages/Profile";
+// import Home from "./pages/Home";
+// import { BrowserRouter, Route, Switch } from "react-router-dom";
+// import Profile from "./pages/Profile";
 import LogIn from "./pages/LogInPage/index";
-import Register from "./pages/Register/index";
+// import Register from "./pages/Register/index";
 import Main from "./pages/Main/index";
 import { useEffect } from "react";
 import { useDB } from "./contexts/DevsUnitedContext";
@@ -13,7 +13,7 @@ import { collections } from "./firebase/firebaseConfig";
 
 function App() {
   
-  const { setTweets, setUser, user } = useDB();
+  const { setTweets, setUser, user,setRegistered } = useDB();
 
 
 
@@ -33,6 +33,7 @@ function App() {
                 userName : doc.data().userName,
                 userDate : doc.data().userDate,
                 userMonth : doc.data().userMonth,
+                userColor: doc.data().userColor,
                 date : doc.data().date ? doc.data().date : null,
                 fecha : doc.data().fecha ? doc.data().fecha  : null,
                 name: doc.data().name ? doc.data().name : null
@@ -55,10 +56,12 @@ function App() {
                 querySnapshot.forEach((doc) => {
                     console.log("Obtuvo usuario: ", doc.data());
                     setUser(doc.data());
+                    setRegistered(true)
                 });
               } else {
                 console.log("Injecta googleCreds");
                 setUser(googleCreds);
+                setRegistered(false)
               }
             })
         } else {
@@ -71,52 +74,16 @@ function App() {
      
 }, []);
 
-  const getContent = () => {
-    if (user) {
-      return <Main />
-    } else {
-      return <LogIn />
-    }
-
-  }
-
   return (
     <>
-        { user ?  
-          <Switch>
-              <Route exact
-                    path="/profile" 
-                    render={() => {
-                      return <Profile user={user} />;
-                    }}/>
-              <Route path="/register" component={Register}/>
-              <Route exact path="/" component={Home}/>
-              {getContent()}
-          </Switch>  
-        : 
+        {user ?
+          <Main />
+          :
           <LogIn />
         }
+          
     </>
   ) 
 }      
 
 export default App;
-
-// {user ?
-      
-//   <Switch>
-      
-//       <Route exact path="/home" component={Home}/>
-//       <Route exact
-//             path="/profile" 
-//             render={() => {
-//               return <Profile user={user} />;
-//             }}/>
-//       <Route path="/register" component={Register}/>
-//       <Route exact path="/" component={Main}/>
-//   </Switch>
-//   : 
-//   <Switch>
-//     <LogIn/>  
-//   </Switch>   
-// }  

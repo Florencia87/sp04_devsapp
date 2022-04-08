@@ -9,7 +9,7 @@ import { collections } from "../../firebase/firebaseConfig"
 
 export default function TweetBox({user}) {
 
-    const [contador, setContador] = useState(0)
+    const [contador, setContador, selectColor] = useState(0)
     
     // const [userTweet, setUserTweet] = useState()
 
@@ -36,7 +36,8 @@ export default function TweetBox({user}) {
             userDate: naturalDate.getDate(),
             userMonth: naturalDate.getMonth()+1,
             date: Date.now(),
-            fecha: new Date()
+            fecha: new Date(),
+            userColor: user.devColor
             
         })
         // console.log(tweet) 

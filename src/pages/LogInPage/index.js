@@ -1,5 +1,6 @@
 import { loginConGoogle } from "../../firebase";
 import "./logIn.css";
+import { Link } from "react-router-dom";
 
 
 export default function LogIn() {
@@ -20,12 +21,14 @@ export default function LogIn() {
                 <p>
                     Lorem ipsum dolor sit amet,<br></br>consectetur adipiscing elit
                 </p>
-                <button className="signInGoogle" onClick={loginConGoogle}>
+                <Link to ="/">
+                    <button className="signInGoogle" onClick={loginConGoogle}>
                     <div className="googleIcon">
-                    <img style={{ width: "20px", height: "30px" }} src="./images/grupo7.svg"alt="Google"></img>
+                    <img style={{ width: "28px", height: "30px" }} src="./images/grupo7.svg"alt="Google"></img>
                     </div>
-                    <img style={{ height: "35px" }} src="./images/grupo6.svg" alt="googleSignIn"></img>
-                </button>
+                    <img style={{ width: "auto", height: "38px" }} src="./images/grupo6.svg" alt="googleSignIn"></img>
+                    </button>
+                </Link>
                 <footer>
                     <img style={{ width: "200px" }} src="./images/footer.svg" alt="Devs_United"></img>
                 </footer>

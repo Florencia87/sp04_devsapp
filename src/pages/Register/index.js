@@ -1,15 +1,17 @@
+// import { useState } from "react";
 import { useDB } from "../../contexts/DevsUnitedContext";
 import "./register.css";
 import ColorPicker from "../../components/ColorPicker";
 import { firestore } from "../../firebase";
 import { collections } from "../../firebase/firebaseConfig";
+// import Home from "../Home/index"
 
 
 export default function Register() {
 
-    const { user, setIsRegistered, devUser, setDevUser } = useDB();
+    const { user, setRegistered, devUser, setDevUser} = useDB();
 
- 
+console.log("pase por register") 
 
     const handleUserNameChange = e => {
         setDevUser({
@@ -23,11 +25,37 @@ export default function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        firestore.collection(collections.DEVUSER).add(devUser)
-        // alert("el formulario se a enviado")
-        setIsRegistered(true)
+        firestore.collection(collections.DEVUSER)
+            .where('devName', '==', devUser.devName)
+            .get()
+            .then(function(querySnapshot) {
+                let userExists = false
+                querySnapshot.forEach(function(doc) {
+                    console.log(doc.id, "=>", doc.data());
+                    return userExists = true
+                });
+                if(userExists){
+                    alert("Ya existe el Username por favor ecribe otro")
+                }else{
+                    firestore.collection(collections.DEVUSER).add(devUser);
+                    setRegistered(true)
+                    setDevUser({
+                        devName: "",
+                    })
+                }
+            })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+        
+        
+
         
     };
+
+    const handleReg = () => {
+        console.log("he cambiado de estado")
+    }
 
     return <> 
             <div className="main-container">
@@ -49,7 +77,9 @@ export default function Register() {
                         />
                         <p>Select your favorite color</p>  
                         <ColorPicker />
-                        <button type="submit" className="continue" >CONTINUE</button>            
+                        
+                            <button type="submit" onChange={handleReg} className="continue">CONTINUE</button>    
+                                    
                     </form> 
                 </div>
                 <footer>
