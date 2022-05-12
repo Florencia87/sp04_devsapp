@@ -4,7 +4,8 @@
     height: 1100px;
 }
 
-.user-profile {
+.profile-nav {
+    padding-top: 4%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -24,4 +25,31 @@
     align-items: center;
     justify-content: center;
 
+}
+
+.left-nav {
+    width: 50%;
+    height: 15%;
+    display: flex;
+}
+
+.left-nav p {
+    color:white;
+}
+
+.right-nav {
+    width: 50%x;
+}
+
+.right-nav img {
+    width: auto;
+}
+
+.right-nav button {
+    width: auto;
+}
+
+.post-container {
+    margin-top: 50%;
+    width: 100%;
 }

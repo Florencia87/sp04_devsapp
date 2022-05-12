@@ -19,17 +19,25 @@ export function DevsUnitedProvider({ children }) {
 
     const [ isLoading, setIsLoading ] = useState(false);
 
+    const [tweet, setTweet] = useState({
+        tweet:"",
+        uid:"",
+        
+    });
+
 
     const [ devUser, setDevUser ] = useState({
         tweet : "",
         uid : "",
-        likes : "",
+        likes : [""],
         email : "",
         devColor: "",
         devAvatar : "",
         devName : "",  
 
     });
+
+    const [ favorites, setFavorites ] = useState([]);
         
     const [ registered, setRegistered ] = useState(false);
 
@@ -40,7 +48,7 @@ export function DevsUnitedProvider({ children }) {
     const [ showPosts, setShowPosts ] = useState(true)
 
 
-    const value = { user, setUser, tweets, setTweets, showPosts, setShowPosts, devUser, setDevUser, registered, setRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading };
+    const value = { user, setUser, tweet, setTweet, tweets, setTweets, showPosts, setShowPosts, devUser, setDevUser, registered, setRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading, favorites, setFavorites };
 
 
  

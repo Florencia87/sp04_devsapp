@@ -4,12 +4,9 @@ import { useState } from "react";
 import { collections } from "../../firebase/firebaseConfig"
 
 
-
-
-
 export default function TweetBox({user}) {
 
-    const [contador, setContador, selectColor] = useState(0)
+    const [contador, setContador] = useState(0)
     
     // const [userTweet, setUserTweet] = useState()
 

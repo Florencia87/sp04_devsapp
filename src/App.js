@@ -1,8 +1,4 @@
-// import Home from "./pages/Home";
-// import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import Profile from "./pages/Profile";
 import LogIn from "./pages/LogInPage/index";
-// import Register from "./pages/Register/index";
 import Main from "./pages/Main/index";
 import { useEffect } from "react";
 import { useDB } from "./contexts/DevsUnitedContext";
@@ -14,7 +10,6 @@ import { collections } from "./firebase/firebaseConfig";
 function App() {
   
   const { setTweets, setUser, user,setRegistered } = useDB();
-
 
 
   useEffect(() => {

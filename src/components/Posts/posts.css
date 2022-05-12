@@ -1,0 +1,93 @@
+
+
+.posts-feed {
+    background-color: rgb(81, 4, 100);
+    margin: auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Fira Code', monospace;
+   
+}
+
+.feed-component {
+    width: 40%;
+    display: flex;
+    /* justify-content:center; */
+    align-items: flex-end;
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    height: max-content;
+   
+}
+
+.profile-pic-feed {
+    width: 60px;
+    margin-top: -57px;
+    padding-bottom: 40px;
+    padding-left: 3px;
+}
+
+.postData {
+    margin-left: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+
+}
+
+.info { 
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.postDate {
+    padding-left: 40px;
+    width: max-content;
+}
+
+.post {
+   
+    text-align: left;
+    color: white;
+    padding-bottom: 15px;
+}
+
+.graphs{
+    display: flex;
+    width: 100%;
+}
+
+.likes {
+    font-size: 15px;
+    color: red;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    
+}
+
+.tinyLike {
+    padding-right: 5px;
+}
+
+.delete {
+    padding-left: 0x    px;
+}
+
+.end-line {
+    width: 40%;
+    background-color:  rgb(203, 69, 236);
+    height: 2px;
+    margin: auto;
+}
+
+.username {
+    
+    padding: 3px;
+}

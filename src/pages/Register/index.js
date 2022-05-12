@@ -1,17 +1,16 @@
-// import { useState } from "react";
 import { useDB } from "../../contexts/DevsUnitedContext";
 import "./register.css";
 import ColorPicker from "../../components/ColorPicker";
 import { firestore } from "../../firebase";
 import { collections } from "../../firebase/firebaseConfig";
-// import Home from "../Home/index"
+
 
 
 export default function Register() {
 
     const { user, setRegistered, devUser, setDevUser} = useDB();
 
-console.log("pase por register") 
+    console.log("pase por register") 
 
     const handleUserNameChange = e => {
         setDevUser({
@@ -46,11 +45,7 @@ console.log("pase por register")
             })
             .catch(function(error) {
                 console.log("Error getting documents: ", error);
-            });
-        
-        
-
-        
+            });       
     };
 
     const handleReg = () => {

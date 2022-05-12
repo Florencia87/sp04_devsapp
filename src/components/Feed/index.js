@@ -1,24 +1,93 @@
 import { firestore } from "../../firebase";
+import firebase from "firebase/app";
 import "./feed.css";
 import { collections } from "../../firebase/firebaseConfig"
 import { useState } from "react";
-// import { DevsUnitedProvider, useDB } from "../../contexts/DevsUnitedContext";
+import {  useDB } from "../../contexts/DevsUnitedContext";
 
 
 
-export default function Feed({tweet, user}) {
+export default function Feed({tweet}) {
 
-    // const { setSelectColor, selectColor, colors, devUser } = useDB();
+    const {  favorites, setFavorites, user, devUser, setDevUser } = useDB();
 
     const [isLiked, setIsLiked] = useState(false)
 
-    const handleLike = (id, likes) => {
+    const handleLike = async (id, likes, tweet) => {
+        
+        // const fieldValueRef = firestore.FieldValue;
+
+        // firestore.doc(`${collections.DEVUSER}/${id}`).update({
+        //     favorites: favorites
+        //         ? fieldValueRef.arrayRemove(tweet.id)
+        //         : fieldValueRef.arrayUnion(tweet.id), 
+        // });
+
         console.log(likes);
         setIsLiked(!isLiked);
         if (!likes) likes = 0;
 
         const newLikes = isLiked ? likes - 1 : likes + 1;
-        firestore.doc(`${collections.TWEETS}/${id}`).update({likes: newLikes});
+        firestore.doc(`${collections.TWEETS}/${id}`).update({likes: newLikes})
+
+        let favoriteTweet = firestore.doc(`${collections.TWEETS}/${id}`)
+
+        console.log(favoriteTweet.id, "aqui figura el ID del Tweet")
+        const favoriteId = favoriteTweet.id
+
+       
+
+        try {
+            const fieldValueRef = firebase.firestore.FieldValue;
+           
+            await firestore
+                .doc(`${collections.DEVUSER,"favorites"}/${id}`)
+                .update({
+                    ...devUser,
+                    favorites: isLiked
+                    ? fieldValueRef.arrayRemove(favoriteId)
+                    : fieldValueRef.arrayUnion(favoriteId),
+                });
+        }catch (error) {
+            console.log("Error getting documents: ", error);
+        }    
+        
+        // const favRef = db.collection('devsUsers').doc('favorites');
+        // const unionRes = await favRef.update({
+        //     favorites: FieldValue.arrayUnion('favoriteId')
+        // })
+
+
+
+        /*
+
+const washingtonRef = db.collection('cities').doc('DC');
+// Atomically add a new region to the "regions" array field.
+const unionRes = await washingtonRef.update({
+  regions: FieldValue.arrayUnion('greater_virginia')
+});
+// Atomically remove a region from the "regions" array field.
+const removeRes = await washingtonRef.update({
+  regions: FieldValue.arrayRemove('east_coast')
+});
+        */
+        
+        // setDevUser({
+        //     ...devUser,
+        //     favorites: [favoriteId]
+        // });
+        
+       
+
+        // firestore.doc(`${collections.DEVUSER}/${id}`).update({favorites: favoriteId});
+        
+        
+        // const favorites = isLiked
+       
+        // firestore.doc(`${collections.DEVUSER}/${id}`).update({likes: arrayUnion(tweet)})
+
+
+        
     };  
 
     const handleDeleteTweet = (id) => {
