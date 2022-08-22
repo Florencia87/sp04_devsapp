@@ -2,28 +2,62 @@ import { firestore } from "../../firebase";
 import firebase from "firebase/app";
 import "./feed.css";
 import { collections } from "../../firebase/firebaseConfig"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {  useDB } from "../../contexts/DevsUnitedContext";
 
 
 
 export default function Feed({tweet}) {
+    const {  favorites, setFavorites, user, devUser, setDevUser, setUserId, userId } = useDB();
 
-    const {  favorites, setFavorites, user, devUser, setDevUser } = useDB();
+    const [isLiked, setIsLiked] = useState(false);
+    
+    // useEffect(()=> {
+    //     firestore
+    //         .collection(collections.DEVUSER)
+    //         .where("uid", "==", user.uid)
+    //         .get()
+    //         .then(snapshot => {
 
-    const [isLiked, setIsLiked] = useState(false)
+    //             const arrayUserId = snapshot.docs.map(doc => {
+    //                 return doc.id
+                    
+    //             })
 
-    const handleLike = async (id, likes, tweet) => {
+    //             console.log("arrayUserId", arrayUserId)
+    //             setUserId(arrayUserId)
+                
+                
+    //         })
+    // },[]);
+
+    // Este useEffect lo que hace es obtener el doc.id del devUser, deberia estar en registrar y no en el Feed.
+    // useEffect(()=> {
+
+    //     firestore
+    //         .collection(collections.DEVUSER)
+    //         .where("uid", "==", user.uid)
+    //         .get()
+    //         .then(snapshot => {
+
+    //             const arrayUserId = snapshot.docs.map(doc => {
+    //                 return {
+    //                     id: doc.id
+    //                 }
+                    
+    //             })
+    //             console.log(arrayUserId)
+    //             setDevUser(arrayUserId)
+                
+    //         });
+    
+    // },[]);
+
+    const handleLike = async (id, likes, arrayUserId) => {
+                
+        console.log("Feed.handleLike -> user: ", user);
         
-        // const fieldValueRef = firestore.FieldValue;
-
-        // firestore.doc(`${collections.DEVUSER}/${id}`).update({
-        //     favorites: favorites
-        //         ? fieldValueRef.arrayRemove(tweet.id)
-        //         : fieldValueRef.arrayUnion(tweet.id), 
-        // });
-
-        console.log(likes);
+        //console.log(likes);
         setIsLiked(!isLiked);
         if (!likes) likes = 0;
 
@@ -31,17 +65,37 @@ export default function Feed({tweet}) {
         firestore.doc(`${collections.TWEETS}/${id}`).update({likes: newLikes})
 
         let favoriteTweet = firestore.doc(`${collections.TWEETS}/${id}`)
+        
 
-        console.log(favoriteTweet.id, "aqui figura el ID del Tweet")
+        //console.log(favoriteTweet.id, "aqui figura el ID del Tweet")
         const favoriteId = favoriteTweet.id
 
-       
+        // const fetchDevUserId = () => {
+        //     return db
+        //         .collection(collections.DEVUSER)
+        //         .get()
+        //         .then((snapshot) => {
+        //             return snapshot.docs.map((doc) => {
+        //                 const data = doc.data()
+        //                 const id = doc.id
+
+        //                 return {
+        //                     id,
+        //                     ...data,
+        //                 }    
+        //             })
+        //         })
+        // }
+
 
         try {
             const fieldValueRef = firebase.firestore.FieldValue;
-           
+            console.log("Feed.handleLike.try -> user: ", user);
+            console.log("Feed.handleLike.try -> user.id: ", user.devId);
+
             await firestore
-                .doc(`${collections.DEVUSER,"favorites"}/${id}`)
+                .collection(collections.DEVUSER)
+                .doc(user.devId)
                 .update({
                     ...devUser,
                     favorites: isLiked
@@ -50,49 +104,32 @@ export default function Feed({tweet}) {
                 });
         }catch (error) {
             console.log("Error getting documents: ", error);
-        }    
-        
-        // const favRef = db.collection('devsUsers').doc('favorites');
-        // const unionRes = await favRef.update({
-        //     favorites: FieldValue.arrayUnion('favoriteId')
-        // })
-
-
-
-        /*
-
-const washingtonRef = db.collection('cities').doc('DC');
-// Atomically add a new region to the "regions" array field.
-const unionRes = await washingtonRef.update({
-  regions: FieldValue.arrayUnion('greater_virginia')
-});
-// Atomically remove a region from the "regions" array field.
-const removeRes = await washingtonRef.update({
-  regions: FieldValue.arrayRemove('east_coast')
-});
-        */
-        
-        // setDevUser({
-        //     ...devUser,
-        //     favorites: [favoriteId]
-        // });
-        
-       
-
-        // firestore.doc(`${collections.DEVUSER}/${id}`).update({favorites: favoriteId});
-        
-        
-        // const favorites = isLiked
-       
-        // firestore.doc(`${collections.DEVUSER}/${id}`).update({likes: arrayUnion(tweet)})
-
-
-        
+        }        
     };  
 
+    
     const handleDeleteTweet = (id) => {
         firestore.doc(`${collections.TWEETS}/${id}`).delete()
     }
+
+         
+    // const getUserId  =  firestore
+    //         .collection(collections.DEVUSER)
+    //         .where("uid", "==", user.uid)
+    //         .get()
+    //         .then(snapshot => {
+
+    //             const arrayUserId = snapshot.docs.map(doc => {
+    //                 return {
+    //                     id: doc.id
+    //                 }
+                    
+    //             })
+
+    //             setDevUser(arrayUserId)
+                
+    //         });
+    
 
     const months = [ 
         "Diciembre",   
@@ -114,6 +151,7 @@ const removeRes = await washingtonRef.update({
 
     return (
         <div className="posts-feed">
+            {/* {getUserId()} */}
             <div className="feed-component">
                 <img className="profile-pic-feed" src={tweet.userAvatar} alt="profileLogo" />
                 <div className="postData">
@@ -125,7 +163,7 @@ const removeRes = await washingtonRef.update({
                     </div>
                     <div className="post">{tweet.tweet}</div>
                     <div className="graphs">
-                        <span className="likes" onClick={() => handleLike(tweet.id, tweet.likes)}>
+                        <span className="likes" onClick={() => handleLike(tweet.id, tweet.likes, devUser.id)}>
                             {isLiked ? (
                             <img className="tinyLike" height="13px" src="./images/like.svg" alt="likesIcon" />  
                             ) : (

@@ -11,7 +11,7 @@ export const colors = [
 const DevsUnitedContext = createContext([]);
 
 export function DevsUnitedProvider({ children }) {
-    console.log("excecuting DevsUnitedProvider");
+    console.log("excecuting DevsUnitedProvider: ", children);
 
     const [ user, setUser ] = useState([]);
 
@@ -28,14 +28,18 @@ export function DevsUnitedProvider({ children }) {
 
     const [ devUser, setDevUser ] = useState({
         tweet : "",
+        devId: "",
         uid : "",
-        likes : [""],
+        favorites : [""],
         email : "",
         devColor: "",
         devAvatar : "",
         devName : "",  
 
     });
+
+
+    const [userId, setUserId] = useState([]);
 
     const [ favorites, setFavorites ] = useState([]);
         
@@ -48,7 +52,7 @@ export function DevsUnitedProvider({ children }) {
     const [ showPosts, setShowPosts ] = useState(true)
 
 
-    const value = { user, setUser, tweet, setTweet, tweets, setTweets, showPosts, setShowPosts, devUser, setDevUser, registered, setRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading, favorites, setFavorites };
+    const value = { user, setUser, tweet, setTweet, tweets, setTweets, userId, setUserId, showPosts, setShowPosts, devUser, setDevUser, registered, setRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading, favorites, setFavorites };
 
 
  

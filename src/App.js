@@ -11,6 +11,7 @@ function App() {
   
   const { setTweets, setUser, user,setRegistered } = useDB();
 
+  console.log("App -> user: ", user);
 
   useEffect(() => {
     const cancelSus = firestore
@@ -50,13 +51,15 @@ function App() {
               if (!querySnapshot.empty) {
                 querySnapshot.forEach((doc) => {
                     console.log("Obtuvo usuario: ", doc.data());
+                    console.log("COntexto: {}, {}", user, setUser);
                     setUser(doc.data());
-                    setRegistered(true)
+                    setRegistered(true);
                 });
               } else {
                 console.log("Injecta googleCreds");
                 setUser(googleCreds);
-                setRegistered(false)
+                setRegistered(false);
+                console.log("App.auth -> user: ", user);
               }
             })
         } else {
@@ -68,6 +71,8 @@ function App() {
     return () => cancelSus();
      
 }, []);
+
+
 
   return (
     <>

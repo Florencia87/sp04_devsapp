@@ -35,6 +35,7 @@ export default function TweetBox({user}) {
             date: Date.now(),
             fecha: new Date(),
             userColor: user.devColor
+          
             
         })
         // console.log(tweet) 
