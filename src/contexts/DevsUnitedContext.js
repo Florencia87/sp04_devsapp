@@ -11,7 +11,7 @@ export const colors = [
 const DevsUnitedContext = createContext([]);
 
 export function DevsUnitedProvider({ children }) {
-    console.log("excecuting DevsUnitedProvider: ", children);
+    // console.log("excecuting DevsUnitedProvider: ", children);
 
     const [ user, setUser ] = useState([]);
 
@@ -28,7 +28,6 @@ export function DevsUnitedProvider({ children }) {
 
     const [ devUser, setDevUser ] = useState({
         tweet : "",
-        devId: "",
         uid : "",
         favorites : [""],
         email : "",
@@ -39,9 +38,9 @@ export function DevsUnitedProvider({ children }) {
     });
 
 
-    const [userId, setUserId] = useState([]);
+    const [userId, setUserId] = useState();
 
-    const [ favorites, setFavorites ] = useState([]);
+    const [ favorites, setFavorites ] = useState([""]);
         
     const [ registered, setRegistered ] = useState(false);
 
@@ -51,10 +50,22 @@ export function DevsUnitedProvider({ children }) {
 
     const [ showPosts, setShowPosts ] = useState(true)
 
+    const [ state, setCurrentState ] = useState(0);
 
-    const value = { user, setUser, tweet, setTweet, tweets, setTweets, userId, setUserId, showPosts, setShowPosts, devUser, setDevUser, registered, setRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading, favorites, setFavorites };
+     /*
+    State
 
+    0: inicializado
+    1: loading
+    2: log in completo
+    3: logIn sin registro
+    4: nadie loqueado
+    5: registrado
+    */
 
+    const value = { user, setUser, tweet, setTweet, tweets, setTweets, userId, setUserId, showPosts, setShowPosts, devUser, setDevUser, registered, setRegistered, regUserName, setRegUserName, selectColor, setSelectColor, colors, isLoading, setIsLoading, favorites, setFavorites, state, setCurrentState };
+
+   
  
 
     return (

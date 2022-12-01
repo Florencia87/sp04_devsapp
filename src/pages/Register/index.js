@@ -4,39 +4,18 @@ import ColorPicker from "../../components/ColorPicker";
 import { firestore } from "../../firebase";
 import { collections } from "../../firebase/firebaseConfig";
 import { useEffect } from "react";
+import Home from "../Home/index"
 
 
 
 export default function Register() {
 
-    const { user, setRegistered, devUser, setDevUser, setUserId } = useDB();
+    const { user, setRegistered, devUser, setDevUser, userId, registered } = useDB();
 
     console.log("pase por register") 
-
+    console.log(userId, "este es el userId desde Register")
 
     
-        // firestore
-        //     .collection(collections.DEVUSER)
-        //     .where("uid", "==", user.uid)
-        //     .get()
-        //     .then(snapshot => {
-
-        //         const arrayUserId = snapshot.docs.map(doc => {
-        //             return doc.id
-                    
-        //         })
-
-        //         console.log("arrayUserId", arrayUserId)
-        //         setDevUser({
-        //             ...devUser,
-        //             devId: arrayUserId
-        //         })
-                
-                
-        //     });
-    
-    
-
     const handleUserNameChange = e => {
         setDevUser({
             ...devUser,
@@ -44,7 +23,6 @@ export default function Register() {
             uid: user.uid,
             email: user.email,
             devAvatar: user.photoURL,
-    
            
         })
     };
@@ -67,14 +45,6 @@ export default function Register() {
                     let solicitarDocumento = enviarUsuario.then((docRef) => {
                         return docRef.get();
                     })
-
-                    // solicitarDocumento.then((doc) => {
-                    //     let nuevoUsuario = {
-                    //         id : doc.id
-                    //     }
-                    // setDevUser([nuevoUsuario, ...devUser])
-                    // })
-                  
                     setRegistered(true)
                     setDevUser({
                         devName: "",
@@ -89,60 +59,45 @@ export default function Register() {
        
     };
 
-    const handleReg = () => {
-        console.log("he cambiado de estado")
-    }
-
-    // const getUserId = () => {
-         
-    //     firestore
-    //         .collection(collections.DEVUSER)
-    //         .where("uid", "==", user.uid)
-    //         .get()
-    //         .then(snapshot => {
-
-    //             const arrayUserId = snapshot.docs.map(doc => {
-    //                 return doc.id
-                    
-    //             })
-
-    //             firestore.doc(`${collections.DEVUSER}`).update({devId: arrayUserId})
-                
-                
-                
-    //         });
-    // }
-
-    return <> 
+    return (
+        <>
+            {registered === false && (
             <div className="main-container">
-                <div className="register-component">
-                    <section className="presentation">
-                        <img style={{ width: "160px" }} src="./images/grupo2.svg" alt="ispotipo"></img>
-                        <img style={{ width: "300px" }} src="./images/Logotipo.svg" alt="logotipo"></img>
-                    </section>
-                    <form onSubmit={handleSubmit} className="registerSection">
-                        <h1>
-                            WELCOME <br></br> {devUser.devName}
-                        </h1>
-                        <input
-                            type="text"
-                            value={devUser.devName}
-                            placeholder="Type your UserName"
-                            className="searchInput"
-                            onChange={handleUserNameChange}
-                        />
-                        <p>Select your favorite color</p>  
-                        <ColorPicker />
-                        
-                            <button type="submit" onChange={handleReg} className="continue">CONTINUE</button>    
-                                    
-                    </form> 
+                    <div className="register-component">
+                        <section className="presentation">
+                            <img style={{ width: "160px" }} src="./images/grupo2.svg" alt="ispotipo"></img>
+                            <img style={{ width: "300px" }} src="./images/Logotipo.svg" alt="logotipo"></img>
+                        </section>
+                        <form onSubmit={handleSubmit} className="registerSection">
+                            <h1>
+                                WELCOME <br></br> {devUser.devName}
+                            </h1>
+                            <input
+                                type="text"
+                                value={devUser.devName}
+                                placeholder="Type your UserName"
+                                className="searchInput"
+                                onChange={handleUserNameChange}
+                            />
+                            <p>Select your favorite color</p>  
+                            <ColorPicker />
+                            
+                                <button type="submit"  className="continue">CONTINUE</button>    
+                                        
+                        </form> 
 
-                    {/* <>{setRegistered != true getUserId()</> */}
-                </div>
-                <footer>
-                    <img style={{ width: "200px" }} src="./images/footer.svg" alt="Devs_United"></img>
-                </footer>
-            </div> 
+                        {/* <>{setRegistered != true getUserId()</> */}
+                    </div>
+                    <footer>
+                        <img style={{ width: "200px" }} src="./images/footer.svg" alt="Devs_United"></img>
+                    </footer>
+                </div> 
+            )} 
+            {registered && (
+                <Home/>
+            )}
         </>
+    )
+       
+            
   }

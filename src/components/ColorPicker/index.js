@@ -9,7 +9,6 @@ function ColorPicker() {
     const handleColor = (color) => {
       setDevUser({
         ...devUser,
-        // color: selectColor.name,
         devColor: selectColor.hex
       });
       setSelectColor(color)
@@ -22,7 +21,6 @@ function ColorPicker() {
           key={color.name}
           className="color"
           style={{ backgroundColor: color.hex }}
-          // onClick={() => setSelectColor(color)}
           onClick={() => handleColor(color)}
         />
       );

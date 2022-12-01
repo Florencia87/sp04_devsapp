@@ -11,22 +11,18 @@ export default function Main() {
 
   console.log("pase por main")
 
-  console.log(user.devName, "este es el devName desde Main")
-  console.log(devUser.devName, "este es el nombre del devUser desde Main")
- 
+  console.log(user.devName, "este es el devName desde Main") 
   
-  console.log("registered", registered)
+  console.log("You are Registered", registered)
   
   return (
-    <> 
-      { registered ?
+     registered ?
           (<main className="main">
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/" component={Home} />
-          </main>)
-       :
+          </main>
+          ) :
           <Register />
-      }
-    </>
+      
     );
 }    

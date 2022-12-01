@@ -1,17 +1,26 @@
 import LogIn from "./pages/LogInPage/index";
-import Main from "./pages/Main/index";
+import Home from "./pages/Home/index";
+import Profile from "./pages/Profile/index";
+// import Register from "../../pages/Register/index";
+// import Main from "./pages/Main/index";
 import { useEffect } from "react";
 import { useDB } from "./contexts/DevsUnitedContext";
 import { firestore, auth } from "./firebase/index";
 import { collections } from "./firebase/firebaseConfig";
+import Register from "./pages/Register/index"
+import { Route } from "react-router-dom";
 
 
 
 function App() {
   
-  const { setTweets, setUser, user,setRegistered } = useDB();
+  const { setTweets, setUser, user,setRegistered, state, setCurrentState } = useDB();
+
+  
 
   console.log("App -> user: ", user);
+
+  
 
   useEffect(() => {
     const cancelSus = firestore
@@ -51,19 +60,22 @@ function App() {
               if (!querySnapshot.empty) {
                 querySnapshot.forEach((doc) => {
                     console.log("Obtuvo usuario: ", doc.data());
-                    console.log("COntexto: {}, {}", user, setUser);
                     setUser(doc.data());
                     setRegistered(true);
+                    setCurrentState(5)
                 });
               } else {
                 console.log("Injecta googleCreds");
                 setUser(googleCreds);
                 setRegistered(false);
+                setCurrentState(3)
                 console.log("App.auth -> user: ", user);
               }
             })
         } else {
           setUser(null);
+          setCurrentState(4)
+          console.log("no hay nadie logueado")
         }
       })
   
@@ -72,16 +84,33 @@ function App() {
      
 }, []);
 
+  if (state === 4) {
+    return < LogIn />
+  }
 
+  if (state === 3) {
+    return <Register />
+  }
+
+  if (state === 5) {
+    return (
+      <>
+            
+            <Route exact path="/" component={Home} />
+            <Route exact path="/profile" component={Profile} />
+      </>      
+    )
+  }
 
   return (
     <>
-        {user ?
-          <Main />
-          :
-          <LogIn />
-        }
-          
+      {user === null && (
+        <LogIn />
+      )}
+
+      {state === 5 && (
+        <Home />
+      )}
     </>
   ) 
 }      

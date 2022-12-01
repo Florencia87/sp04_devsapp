@@ -3,7 +3,7 @@ import "./posts.css";
 
 
 
-export default function Posts({post}) {
+export default function Posts({post, like}) {
 
    
     const months = [ 
